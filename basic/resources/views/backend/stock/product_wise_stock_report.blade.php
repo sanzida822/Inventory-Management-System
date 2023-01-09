@@ -72,9 +72,9 @@
         </div>
                 </div>
             </div>
-        </div> <!-- end col -->
-    </div> <!-- end row -->
-</div> <!-- container-fluid -->
+        </div> 
+    </div> 
+</div> 
 </div>
 
 </div>

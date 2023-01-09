@@ -44,12 +44,18 @@ Route::controller(SupplierController::class)->group(function () {
 });
 // customer controller
 Route::controller(CustomerController::class)->group(function () {
+
     Route::get('/customer/all', 'CustomerAll')->name('customer.all');
+
     Route::get('/customer/add', 'CustomerAdd')->name('customer.add'); //go to add page
     Route::post('/customer/store', 'CustomerStore')->name('customer.store'); //store customer data
     Route::get('/customer/edit/{id}', 'CustomerEdit')->name('customer.edit');
     Route::post('/customer/update', 'CustomerUpdate')->name('customer.update');
     Route::get('/customer/delete/{id}', 'CustomerDelete')->name('customer.delete');
+    Route::get('/customer/credit', 'CustomerCredit')->name('customer.credit');
+    Route::get('/customer/edit/invoice/{invoice_id}', 'CustomerEditInvoice')->name('customer.edit.invoice');
+    Route::post('/customer/update/invoice/part/', 'CustomerUpdateInvoice')->name('customer.update.invoice.part');
+
 });
 
 
