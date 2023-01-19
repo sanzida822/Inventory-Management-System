@@ -7,31 +7,44 @@ use App\Http\Controllers\pos\AjxController;
 use App\Http\Controllers\pos\CategoryController;
 use App\Http\Controllers\pos\SupplierController;
 use App\Http\Controllers\pos\CustomerController;
+use App\Http\Controllers\pos\DashboardController;
 use App\Http\Controllers\pos\ManageInvoiceController;
 use App\Http\Controllers\pos\ManageStockController;
 use App\Http\Controllers\pos\ProductController;
 use App\Http\Controllers\pos\PurchaseController;
 use App\Http\Controllers\pos\UnitController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-Route::controller(DemoController::class)->group(function () {
-    Route::get('/about', 'Index')->name('about.page')->middleware('check');
-    Route::get('/contact', 'ContactMethod')->name('cotact.page');
-});
+//Route::controller(DemoController::class)->group(function () {
+   /// Route::get('/about', 'Index')->name('about.page')->middleware('check');
+   // Route::get('/contact', 'ContactMethod')->name('cotact.page');
+///});
 
 Route::middleware('auth')->group(function(){  
 Route::controller(AdminController::class)->group(function () {
+  
     Route::get('/admin/logout', 'destroy')->name('admin.logout');
+
     Route::get('/admin/profile', 'Profile')->name('admin.profile');
     Route::get('/edit/profile', 'EditProfile')->name('edit.profile');
     Route::post('/store/profile', 'StoreProfile')->name('store.profile');
 
     Route::get('/change/password', 'ChangePassword')->name('change.password');
     Route::post('/update/password', 'UpdatePassword')->name('update.password');
+    Route::get('/all/admin', 'AdminAll')->name('admin.all');
+    Route::get('/add/admin', 'AdminAdd')->name('admin.add');
+    Route::post('/add/admin', 'AdminStore')->name('admin.store');
+    Route::get('/admin/delete/{id}', 'AdminEdit')->name('admin.edit');
+
+    Route::get('/admin/edit/{id}', 'AdminDelete')->name('admin.delete');
+
+
+    // Route::get('/admin/update/', 'AdminUpdate')->name('admin.update');
 });
 
 Route::controller(SupplierController::class)->group(function () {
@@ -55,7 +68,9 @@ Route::controller(CustomerController::class)->group(function () {
     Route::get('/customer/credit', 'CustomerCredit')->name('customer.credit');
     Route::get('/customer/edit/invoice/{invoice_id}', 'CustomerEditInvoice')->name('customer.edit.invoice');
     Route::post('/customer/update/invoice/part/', 'CustomerUpdateInvoice')->name('customer.update.invoice.part');
-
+    Route::get('/customer/paid', 'CustomerPaid')->name('customer.paid'); 
+    Route::get('/customer/credit/report', 'CustomerCreditReport')->name('customer.report');
+    Route::post('/customer/wise/report', 'CustomerWiseReport')->name('customer.wise.report');
 });
 
 
@@ -96,13 +111,28 @@ Route::controller(ProductController::class)->group(function () {
 Route::controller(AjxController::class)->group(function () {
     Route::get('/getcategory', 'GetCategory')->name('getCategory');
     Route::get('/getProduct', 'GetProduct')->name('getProduct');
+    Route::get('/getSupplierProduct', 'GetSupplierProduct')->name('getSupplierProduct');
     Route::get('/getStock', 'GetProductStrock')->name('getStock');
+   Route::get('/getOldPass', 'GetOldPassword')->name('getOldPass');
+   Route::get('/matchTwoPass', 'MatchTwoPass')->name('passMatch'); //match given new two passsword
+  
+   Route::get('/NewAdminPassLen', 'checkNewPassLen')->name('checkPassLen'); //check len of  passsword when superadmin add new admin
 
     //   Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add'); //go to add page
     // Route::post('/product/store', 'ProductStore')->name('product.store'); //store category data
     //  Route::get('/product/edit/{id}', 'ProductEdit')->name('product.edit');
     //  Route::post('/product/update', 'ProductUpdate')->name('product.update');
     // Route::get('/product/delete/{id}', 'ProductDelete')->name('product.delete');
+
+
+
+});
+
+
+//DashboardController
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('/total/customer/', 'GetTotalCustomer')->name('total.customer');
+   
 
 
 

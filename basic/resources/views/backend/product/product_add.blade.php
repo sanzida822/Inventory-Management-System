@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body"  style="box-shadow: 4px 3px #18814b, -6px 0 0.4em #0080145e">
 
                         <h4 class="card-title">Add new Product </h4><br><br>
 
@@ -33,12 +33,13 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Supplier Name</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example" name="supplier_id" required>
-                                        <option selected="">Open this select menu</option>
+                                    <select class="form-select" aria-label="Default select example" name="supplier_id"
+                                        required>
+                                        <!-- <option selected="">Open this select menu</option> -->
                                         @foreach($supplier as $suppl)
                                         <option value="{{$suppl->id}}">{{$suppl->name}}</option>
                                         @endforeach
-                                
+
                                     </select>
                                 </div>
                             </div>
@@ -46,12 +47,13 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Unit Name</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example" name="unit_id" required>
-                                        <option selected="">Open this select menu</option>
+                                    <select class="form-select" aria-label="Default select example" name="unit_id"
+                                        required>
+                                        <!-- <option selected="">Open this select menu</option> -->
                                         @foreach($unit as $unitdata)
                                         <option value="{{$unitdata->id}}">{{$unitdata->name}}</option>
                                         @endforeach
-                                
+
                                     </select>
                                 </div>
                             </div>
@@ -59,12 +61,13 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Category Name</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example" name="category_id" required> 
-                                        <option selected="">Open this select menu</option>
+                                    <select class="form-select" aria-label="Default select example" name="category_id"
+                                        required>
+                                        <!-- <option>Open this select menu</option> -->
                                         @foreach($category as $categorydata)
                                         <option value="{{$categorydata->id}}">{{$categorydata->name}}</option>
                                         @endforeach
-                                
+
                                     </select>
                                 </div>
                             </div>

@@ -23,12 +23,13 @@ class PurchaseController extends Controller
 
     public function PurchaseAdd()
     {
+        $date=date('Y-m-d');
         $product = Product::all();
         $category = Category::all();
         $supplier = Supplier::all();
         $unit = Unit::all();
 
-        return view('backend.purchase.purchase_add', compact('product', 'category', 'supplier', 'unit'));
+        return view('backend.purchase.purchase_add', compact('product', 'category', 'supplier', 'unit','date'));
     }
 
 

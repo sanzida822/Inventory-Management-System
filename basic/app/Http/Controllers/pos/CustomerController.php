@@ -43,17 +43,31 @@ class CustomerController extends Controller
 
         Image::make($image)->resize(200, 200)->save('upload/customer/' . $name_gen);
         $save_url = "upload/customer/" . $name_gen;
+try{
+    Customer::insert([
+        'name' => $request->name,
+        'mobile_number' => $request->mobile_number,
+        'email' => $request->email,
+        'address' => $request->address,
+        'customer_image' => $save_url,
+        'created_by' => Auth::user()->id,
+        'created_at' => Carbon::now()
 
-        Customer::insert([
-            'name' => $request->name,
-            'mobile_number' => $request->mobile_number,
-            'email' => $request->email,
-            'address' => $request->address,
-            'customer_image' => $save_url,
-            'created_by' => Auth::user()->id,
-            'created_at' => Carbon::now()
+    ]);
+}catch(\Illuminate\Database\QueryException $e){ 
+        $errorCode = $e->errorInfo[1];
+        if($errorCode == 1062){
+            $notification=array(
+                'message'=>'Customer Mobile Number Already Exists',
+                'alert-type'=>'error'
+            );
+            return redirect()->route('customer.add')->with($notification);
+        }
+  
+       
+      }
 
-        ]);
+       
         $notification = array(
             'message' => "Customer Inserted Successfully",
             'alert-type' => "success"
@@ -84,17 +98,34 @@ class CustomerController extends Controller
             Image::make($image)->resize(200, 200)->save('upload/customer/' . $name_gen);
             $save_url = "upload/customer/" . $name_gen;
             $customer = $request->id;
-            Customer::findOrFail($customer)->update(
-                [
-                    'name' => $request->name,
-                    'customer_image' => $save_url,
-                    'mobile_number' => $request->mobile_number,
-                    'email' => $request->email,
-                    'address' => $request->address,
-                    'updated_by' => Auth::user()->id,
-                    'updated_at' => Carbon::now()
-                ]
-            );
+            try{
+                Customer::findOrFail($customer)->update(
+                    [
+                        'name' => $request->name,
+                        'customer_image' => $save_url,
+                        'mobile_number' => $request->mobile_number,
+                        'email' => $request->email,
+                        'address' => $request->address,
+                        'updated_by' => Auth::user()->id,
+                        'updated_at' => Carbon::now()
+                    ]
+                );
+            }
+
+            catch(\Illuminate\Database\QueryException $e){ 
+                $errorCode = $e->errorInfo[1];
+                if($errorCode == 1062){
+                    $notification=array(
+                        'message'=>'Customer Mobile Number Already Exists',
+                        'alert-type'=>'error'
+                    );
+                    return redirect()->route('customer.edit',$request->id)->with($notification);
+                }
+          
+               
+              }
+        
+       
         }
         $notification = array(
             'message' => "Customer Updated Successfully",
@@ -119,10 +150,7 @@ class CustomerController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function CustomerCredit(){
-        $alldata=Payment::whereIn('paid_status',['Full_Due','Partial_Paid'])->get();
-        return view('backend.customer.customer_credit_report',compact('alldata'));
-    }
+  
 
     public function CustomerEditInvoice($invoiceId){
         $payment=Payment::where('invoice_id',$invoiceId)->first();
@@ -170,5 +198,29 @@ class CustomerController extends Controller
        }
 
       
+    }
+    public function CustomerCredit(){ //baki tk
+        $alldata=Payment::whereIn('paid_status',['Full_Due','Partial_Paid'])->latest()->get();
+        return view('backend.customer.customer_credit_report',compact('alldata'));
+    }
+    public function CustomerPaid(){ //dewa tk
+        $alldata=Payment::where('paid_status','!=','Full_Due')->latest()->get();
+     
+        return view('backend.customer.customer_paid_report',compact('alldata'));
+        
+    }
+
+    public function CustomerCreditReport(){
+        $alldata=Customer::all();
+       
+        return view('backend.customer.customerwise_credit_report',compact('alldata'));
+    }
+
+    public function CustomerWiseReport(Request $request){
+        $id=$request->customer_id;
+    
+        $alldata=Payment::where('customer_id',$id)->get();
+      
+        return view('backend.pdfGenerate.customerwise_report',compact('alldata'));
     }
 }

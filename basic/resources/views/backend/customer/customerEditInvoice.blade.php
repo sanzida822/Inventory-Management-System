@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" style="box-shadow: 4px 3px #18814b, -6px 0 0.4em #0080145e">
 
                         <div class="row">
                             <div class="col-12">
@@ -208,7 +208,7 @@
                                             </div>
                                             <br>
                                             <div class="col-md-3 ">
-                                                <input type="text" name="partial_amount" value="0"
+                                                <input type="text" name="partial_amount" value="1"
                                                     class="form-control partial_amount" value=""
                                                     placeholder="Enter paid amount" style="display:none">
 

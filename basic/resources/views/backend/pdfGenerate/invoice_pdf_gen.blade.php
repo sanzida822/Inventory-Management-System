@@ -109,8 +109,8 @@
                                                                     <th>Product Name</th>
                                                                     <th>Current Stock</th>
                                                                     <th>Quantity</th>
-                                                                    <th>Unit Price</th>
-                                                                    <th>Total Price</th>
+                                                                    <th>Unit Price (Tk)</th>
+                                                                    <th>Total Price (Tk)</th>
 
                                                                 </tr>
                                                              </thead>
@@ -165,7 +165,7 @@
                                         <div class="d-print-none">
                                             <div class="float-end">
                                                 <a href="" onclick="window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
-                                                <a href="#" class="btn btn-primary waves-effect waves-light ms-2">download</a>
+
                                             </div>
                                         </div>
                                     </div>

@@ -22,15 +22,29 @@ class SupplierController extends Controller
 
 }
 public function SupplierStore(Request $request){
-   Supplier::insert([
-    'name'=>$request->name,
-   'mobile_number'=>$request->mobile,
-   'email'=>$request->email,
-   'address'=>$request->address,
-   'created_by'=>Auth::user()->id,
-   'created_at'=>Carbon::now(),
-   
-]);
+    try{
+        Supplier::insert([
+            'name'=>$request->name,
+           'mobile_number'=>$request->mobile,
+           'email'=>$request->email,
+           'address'=>$request->address,
+           'created_by'=>Auth::user()->id,
+           'created_at'=>Carbon::now(),
+           
+        ]);
+    }catch(\Illuminate\Database\QueryException $e){ 
+        $errorCode = $e->errorInfo[1];
+        if($errorCode == 1062){
+            $notification=array(
+                'message'=>'Supplier Already Exists',
+                'alert-type'=>'error'
+            );
+            return redirect()->route('supplier.add')->with($notification);
+        }
+  
+       
+      }
+
 $notification=array(
     'message'=>'Supplier added successfully',
     'alert-type'=>'success'
@@ -48,14 +62,29 @@ public function SupplierEdit($id){
 public function SupplierUpdate(Request $request){
     $supplier=$request->id;
    
-    Supplier::findOrFail($supplier)->update([
- 'name'=>$request->name,
-'mobile_number'=>$request->mobile,
-'email'=>$request->email,
-'address'=>$request->address,
-'updated_by'=>Auth::user()->id,
-'updated_at'=>Carbon::now(),
-    ]);
+    try{
+        Supplier::findOrFail($supplier)->update([
+            'name'=>$request->name,
+           'mobile_number'=>$request->mobile,
+           'email'=>$request->email,
+           'address'=>$request->address,
+           'updated_by'=>Auth::user()->id,
+           'updated_at'=>Carbon::now(),
+               ]);
+
+    }catch(\Illuminate\Database\QueryException $e){ 
+        $errorCode = $e->errorInfo[1];
+        if($errorCode == 1062){
+            $notification=array(
+                'message'=>'Supplier Already Exists',
+                'alert-type'=>'error'
+            );
+            return redirect()->route('supplier.edit',$request->id)->with($notification);
+        }
+  
+       
+      }
+ 
 
 $notification=array(
     'message'=>'Supplier Updated successfully',

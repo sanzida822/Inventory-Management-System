@@ -35,15 +35,51 @@ class ProductController extends Controller
 
     public function ProductStore(Request $request)
     {
-        Product::insert([
-            'name' => $request->name,
-            'supplier_id' => $request->supplier_id,
-            'unit_id' => $request->unit_id,
-            'category_id' => $request->category_id,
-            'quantity' => '0',
-            'created_by' => Auth::user()->id,
-            'created_at' => Carbon::now(),
-        ]);
+    //    dd($request->supplier_id);
+    //     if($request->suppl_id==''){
+    //         $notification = array(
+    //             'message' => 'Supplier name must be needed',
+    //             'alert-type' => 'success'
+    //         );
+    //         return redirect()->route('product.add')->with($notification);
+    //     }
+    //     if($request->unitdata->id==''){
+    //         $notification = array(
+    //             'message' => 'Unit name must be needed',
+    //             'alert-type' => 'success'
+    //         );
+    //         return redirect()->route('product.add')->with($notification);
+    //     }
+    //     if($request->categorydata->id==''){
+    //         $notification = array(
+    //             'message' => 'Category name must be needed',
+    //             'alert-type' => 'success'
+    //         );
+    //         return redirect()->route('product.add')->with($notification);
+    //     }
+        try{
+            Product::insert([
+                'name' => $request->name,
+                'supplier_id' => $request->supplier_id,
+                'unit_id' => $request->unit_id,
+                'category_id' => $request->category_id,
+                'quantity' => '0',
+                'created_by' => Auth::user()->id,
+                'created_at' => Carbon::now(),
+            ]);
+        }catch(\Illuminate\Database\QueryException $e){ 
+        $errorCode = $e->errorInfo[1];
+        if($errorCode == 1062){
+            $notification=array(
+                'message'=>'Supplier product already exists',
+                'alert-type'=>'error'
+            );
+            return redirect()->route('product.add')->with($notification);
+        }
+  
+       
+      }
+       
 
         $notification = array(
             'message' => 'Product added successfully',
@@ -64,8 +100,8 @@ class ProductController extends Controller
 
     public function ProductUpdate(Request $request){
        $product=Product::findOrFail($request->id);
-
-       Product::findOrFail($request->id)->update([
+   try{
+    Product::findOrFail($request->id)->update([
         'name'=>$request->name,
         'supplier_id'=>$request->supplier_id,
         'unit_id'=>$request->unit_id,
@@ -74,6 +110,22 @@ class ProductController extends Controller
         'updated_at'=>Carbon::now(),
        ]);
 
+   }catch(\Illuminate\Database\QueryException $e){ 
+    $errorCode = $e->errorInfo[1];
+    if($errorCode == 1062){
+        $notification=array(
+            'message'=>'Supplier product already exists',
+            'alert-type'=>'error'
+        );
+        return redirect()->route('product.edit',$request->id)->with($notification);
+    }
+
+   
+  }
+
+
+
+     
 
        $notification = array(
         'message' => 'Product Updates successfully',

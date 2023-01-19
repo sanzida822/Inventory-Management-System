@@ -26,13 +26,27 @@ class UnitController extends Controller
 
     public function UnitStore(Request $request)
     {
-        Unit::insert([
-            'name' => $request->name,
-            'created_by' => Auth::user()->id,
-            'created_at' => Carbon::now(),
-
-
-        ]);
+        try{
+            Unit::insert([
+                'name' => $request->name,
+                'created_by' => Auth::user()->id,
+                'created_at' => Carbon::now(),
+    
+    
+            ]);
+        }catch(\Illuminate\Database\QueryException $e){ 
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == 1062){
+                $notification=array(
+                    'message'=>'Unit Already Exists',
+                    'alert-type'=>'error'
+                );
+                return redirect()->route('unit.add')->with($notification);
+            }
+      
+           
+          }
+      
 
         $notification = array(
             'message' => 'Unit added successfully',
@@ -56,12 +70,27 @@ class UnitController extends Controller
 
         $unit = $request->id;
 
-        Unit::findOrFail($unit)->update([
-            'name' => $request->name,
-     
-            'updated_by' => Auth::user()->id,
-            'updated_at' => Carbon::now(),
-        ]);
+try{
+    Unit::findOrFail($unit)->update([
+        'name' => $request->name,
+ 
+        'updated_by' => Auth::user()->id,
+        'updated_at' => Carbon::now(),
+    ]);
+}catch(\Illuminate\Database\QueryException $e){ 
+    $errorCode = $e->errorInfo[1];
+    if($errorCode == 1062){
+        $notification=array(
+            'message'=>'Unit Already Exists',
+            'alert-type'=>'error'
+        );
+        return redirect()->route('unit.edit',$request->id)->with($notification);
+    }
+
+   
+  }
+
+      
 
         $notification = array(
             'message' => 'Unit Updated successfully',

@@ -24,8 +24,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                    <div class="card-body">
-        <a href="{{route('purchase.add')}}" style="float:right" class="btn btn-dark btn-rounded waves-effect waves-light">Add Purchase</a>
+                                    <div class="card-body"  style="box-shadow: 4px 3px #18814b, -6px 0 0.4em #0080145e">
+        <a href="{{route('purchase.add')}}" style="float:right" class="btn btn-success btn-rounded waves-effect waves-light">Add Purchase</a>
                                      <br><br>
         <h4 class="card-title">Purchase Table</h4>
         

@@ -12,7 +12,8 @@
     <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
 
     <!-- Bootstrap Css -->
-    <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
+        type="text/css" />
     <!-- Icons Css -->
     <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
@@ -41,29 +42,27 @@
                                         <div class="d-flex flex-row align-items-center" style="margin-bottom: 22px;">
                                             <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-right: 5px;"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                            <input class="form-control" id="name" type="text" name="name" required="" placeholder="Name">
+                                                <input class="form-control" id="name" type="text" name="name"
+                                                    required="" placeholder="Name">
                                             </div>
                                         </div>
 
-                                        <div class="d-flex flex-row align-items-center" style="margin-bottom: 22px;">
-                                            <i class="fas fa-user fa-lg me-3 fa-fw" style="margin-right: 5px;"></i>
-                                            <div class="form-outline flex-fill mb-0">
-                                            <input class="form-control" id="username" type="text" name="username" required="" placeholder="UserName">
-                                            </div>
-                                        </div>
-                                       
+
+
 
                                         <div class="d-flex flex-row align-items-center" style="margin-bottom: 22px;">
-                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"" style="margin-right: 5px;"></i>
+                                            <i class="fas fa-envelope fa-lg me-3 fa-fw" style="margin-right: 5px;"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                            <input class="form-control" id="email" type="email" name="email" required="" placeholder="Email">
+                                                <input class="form-control" id="email" type="email" name="email"
+                                                    required="" placeholder="Email">
 
                                             </div>
                                         </div>
                                         <div class="d-flex flex-row align-items-center" style="margin-bottom: 22px;">
                                             <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-right: 5px;"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                            <input class="form-control" id="password" type="password" name="password" required="" placeholder="Password">
+                                                <input class="form-control" id="password" type="password"
+                                                    name="password" required="" placeholder="Password">
 
                                             </div>
                                         </div>
@@ -71,27 +70,34 @@
                                         <div class="d-flex flex-row align-items-center" style="margin-bottom: 22px;">
                                             <i class="fas fa-lock fa-lg me-3 fa-fw" style="margin-right: 5px;"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                            <input class="form-control" id="password_confirmation" type="password" name="password_confirmation" required="" placeholder="Password Confirmation">
+                                                <input class="form-control" id="password_confirmation" type="password"
+                                                    name="password_confirmation" required=""
+                                                    placeholder="Password Confirmation">
 
                                             </div>
                                         </div>
 
 
                                         <div class="d-flex justify-content-end  mb-3 mb-lg-4">
-                                            <button type="submit" name="submit" style="background-color:#993721;border:#993721;font-weight:600" class="btn btn-primary btn-lg">Register</button>
+                                            <button type="submit" name="submit"
+                                                style="background-color:#993721;border:#993721;font-weight:600"
+                                                class="btn btn-primary btn-lg">Register</button>
                                         </div>
                                     </form>
                                     <div class="d-flex justify-content-center  mb-3 mb-lg-4">
                                         <p><small>Already Have an Account? </small></p>
-                                        <a href="{{ route('login') }}" style="text-decoration: none;color:#993721; padding-left:3px;"><small>
+                                        <a href="{{ route('login') }}"
+                                            style="text-decoration: none;color:#993721; padding-left:3px;"><small>
                                                 Log IN
                                             </small></a>
 
                                     </div>
                                 </div>
-                                <div class="col-sm-6 d-flex align-items-center order-1 order-lg-2" style="    justify-content: space-around;">
+                                <div class="col-sm-6 d-flex align-items-center order-1 order-lg-2"
+                                    style="    justify-content: space-around;">
 
-                                    <img src="{{ asset('backend/assets/images/a.png') }}" width="70%" height="auto" class=" img-fluid" alt="Sample image">
+                                    <img src="{{ asset('backend/assets/images/a.png') }}" width="70%" height="auto"
+                                        class=" img-fluid" alt="Sample image">
 
                                 </div>
                             </div>
@@ -198,14 +204,14 @@
                                 </div>
                             </div>
                         </form> -->
-                        <!-- end form -->
-                    <!-- </div>
+    <!-- end form -->
+    <!-- </div>
                 </div> -->
-                <!-- end cardbody -->
-            <!-- </div> -->
-            <!-- end card -->
-        <!-- </div> -->
-        <!-- end container -->
+    <!-- end cardbody -->
+    <!-- </div> -->
+    <!-- end card -->
+    <!-- </div> -->
+    <!-- end container -->
     <!-- </div> -->
     <!-- end -->
 

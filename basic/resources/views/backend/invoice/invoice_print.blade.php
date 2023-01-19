@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                    <div class="card-body">
+                                    <div class="card-body"  style="box-shadow: 4px 3px #18814b, -6px 0 0.4em #0080145e">
         <!-- <a href="{{route('invoice.print')}}" style="float:right" class="btn btn-dark btn-rounded waves-effect waves-light">Print Invoice</a> -->
                                      <br><br>
         <h4 class="card-title">Print Invoice Table</h4>

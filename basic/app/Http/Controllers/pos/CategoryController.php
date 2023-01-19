@@ -24,12 +24,26 @@ class CategoryController extends Controller
     }
 
 public function CategoryStore(Request $request){
-    Category::insert([
-        'name'=>$request->name,
-       'created_by'=>Auth::user()->id,
-       'created_at'=>Carbon::now(),
+    try{
+        Category::insert([
+            'name'=>$request->name,
+           'created_by'=>Auth::user()->id,
+           'created_at'=>Carbon::now(),
+           
+        ]);
+    }catch(\Illuminate\Database\QueryException $e){ 
+        $errorCode = $e->errorInfo[1];
+        if($errorCode == 1062){
+            $notification=array(
+                'message'=>'Category Already Exists',
+                'alert-type'=>'error'
+            );
+            return redirect()->route('category.add')->with($notification);
+        }
+  
        
-    ]);
+      }
+ 
     $notification=array(
         'message'=>'Category added successfully',
         'alert-type'=>'success'
@@ -48,13 +62,28 @@ public function CategoryStore(Request $request){
     public function CategoryUpdate(Request $request)
     {
         $category=$request->id;
+        try{
+            Category::findOrFail($category)->update([
+                'name'=>$request->name,
+               'updated_by'=>Auth::user()->id,
+               'updated_at'=>Carbon::now(),
+                   ]);
+               
+        }catch(\Illuminate\Database\QueryException $e){ 
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == 1062){
+                $notification=array(
+                    'message'=>'Category Already Exists',
+                    'alert-type'=>'error'
+                );
+                return redirect()->route('category.edit',$request->id)->with($notification);
+            }
+        
+           
+          }
    
-    Category::findOrFail($category)->update([
-     'name'=>$request->name,
-    'updated_by'=>Auth::user()->id,
-    'updated_at'=>Carbon::now(),
-        ]);
-    
+   
+   
     $notification=array(
         'message'=>'Category Updated successfully',
         'alert-type'=>'success'
@@ -74,5 +103,3 @@ public function CategoryStore(Request $request){
     
 
 }
-
-

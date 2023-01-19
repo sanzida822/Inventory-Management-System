@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" style="box-shadow: 4px 3px #18814b, -6px 0 0.4em #0080145e">
 
                         <h4 class="card-title">Add new Customer </h4><br><br>
 
@@ -21,7 +21,8 @@
                         @endif
 
 
-                        <form method="post" action="{{ route('customer.store') }}" id="myForm" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('customer.store') }}" id="myForm"
+                            enctype="multipart/form-data">
                             @csrf
 
                             <div class="row mb-3">
@@ -36,7 +37,7 @@
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Mobile Number</label>
                                 <div class="form-group col-sm-10">
-                                    <input name="mobile_number" class="form-control" required type="text" id="mobile">
+                                    <input name="mobile_number" class="form-control" required type="number" id="mobile">
                                 </div>
                             </div>
                             <!-- end row -->
@@ -64,12 +65,13 @@
                                     <input name="customer_image" class="form-control" type="file" id="image" required>
                                 </div>
                             </div>
-                          
+
 
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label"> </label>
                                 <div class="col-sm-10">
-                                    <img id="showImage" class="rounded avatar-lg" src="{{url('upload/no_image.jpg')}}" alt="Card image cap">
+                                    <img id="showImage" class="rounded avatar-lg" src="{{url('upload/no_image.jpg')}}"
+                                        alt="Card image cap">
                                 </div>
                             </div>
 
@@ -119,14 +121,14 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#image').change(function(e) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#showImage').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        });
+$(document).ready(function() {
+    $('#image').change(function(e) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#showImage').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files['0']);
     });
+});
 </script>
 @endsection

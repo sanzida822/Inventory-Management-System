@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" style="box-shadow: 4px 3px #18814b, -6px 0 0.4em #0080145e">
 
                         <h4 class="card-title">Add Purchase </h4><br><br>
                         <div class="row">
@@ -16,7 +16,7 @@
 
                                 <label for="example-text-input" class="col-form-label">Date</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" id="date" name="date" type="date" value="2011-08-19">
+                                    <input class="form-control" id="date" name="date" type="date" value="{{$date}}">
                                 </div>
 
                             </div>
@@ -25,7 +25,8 @@
 
                                 <label for="example-text-input" class="col-form-label">Purchase No</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" name="purchase_no" type="text" value="" id="purchase_no">
+                                    <input class="form-control" name="purchase_no" type="text" value=""
+                                        id="purchase_no">
                                 </div>
 
                             </div>
@@ -33,7 +34,8 @@
                             <div class="col-md-4">
 
                                 <label for="example-text-input" class="col-form-label">Supplier Name</label>
-                                <select class="form-select select2" aria-label="Default select example" id="supplier_id" name="supplier_id" required>
+                                <select class="form-select" aria-label="Default select example" id="supplier_id"
+                                    name="supplier_id" required>
                                     <option selected="">Open this select menu</option>
                                     @foreach($supplier as $suppl)
                                     <option value="{{$suppl->id}}">{{$suppl->name}}</option>
@@ -47,7 +49,8 @@
                             <div class="col-md-4">
 
                                 <label for="example-text-input" class="col-form-label">Category Name</label>
-                                <select class="form-select select2" aria-label="Default select example" id="category_id" name="category_id" required>
+                                <select class="form-select" aria-label="Default select example" id="category_id"
+                                    name="category_id" required>
                                     <option selected="">Open this select menu</option>
                                     <!-- @foreach($category as $suppl)
                                     <option value="{{$suppl->id}}">{{$suppl->name}}</option>
@@ -58,7 +61,8 @@
                             <div class="col-md-4">
 
                                 <label for="example-text-input" class="col-form-label">Product Name</label>
-                                <select class="form-select select2" aria-label="Default select example" id="product_id" name="product_id" required>
+                                <select class="form-select" aria-label="Default select example" id="product_id"
+                                    name="product_id" required>
                                     <option selected="">Open this select menu</option>
 
                                 </select>
@@ -70,7 +74,9 @@
 
                                 <!-- <input type="submit" id="add_more" name="add_more" class="btn btn-secondary btn-rounded waves-effect waves-light" value="Add more"> -->
                                 <!-- <input type="submit" class="btn btn-secondary btn-rounded  ri-file-add-fill addeventmore" name="" id="" value="Add more"> -->
-                                <button class="btn btn-secondary btn-rounded  fas fa-plus-circle addeventmore" value="">Add more</button>
+                                <button class="btn btn-success btn-rounded  fas fa-plus-circl addeventmore" value="">Add
+                                    more</button>
+                                <!-- circle for + icon -->
                                 <!-- <i class=" " id=""> Add more</i> -->
 
 
@@ -102,7 +108,8 @@
 
                                         </td>
                                         <td>
-                                            <input type="text" name="calculate_amount" value="0" id="calculate_amount" class="form-control" readonly style="background-color: #ddd;">
+                                            <input type="text" name="calculate_amount" value="0" id="calculate_amount"
+                                                class="form-control" readonly style="background-color: #ddd;">
                                         </td>
 
                                         <td>
@@ -203,52 +210,51 @@
     </script>
 
 
-<!-- delte row when click cross button -->
+    <!-- delte row when click cross button -->
     <script>
-        $(document).on("click", ".deleterow", function(e) { 
-            $(this).closest('.delete_add_more_item').remove();
-            totalAmount();
-        })
+    $(document).on("click", ".deleterow", function(e) {
+        $(this).closest('.delete_add_more_item').remove();
+        totalAmount();
+    })
     </script>
 
 
-<!-- calculate total price -->
+    <!-- calculate total price -->
     <script>
-        $(document).on("keyup click", ".unit_price,.buying_qty", function(e) { 
-            //  var price =$(".unit_price").val();
-           var price=  $(this).closest("tr").find("input.unit_price").val();
-           //  var qty =$(".buying-qty").val();
-           var qty= $(this).closest("tr").find("input.buying_qty").val();
-           var totalPrice=price*qty;
-           $(this).closest("tr").find("input.buying_price").val(totalPrice);
-           
-      
-       //    alert(totalPrice)
-      
-       totalAmount();
-        })
+    $(document).on("keyup click", ".unit_price,.buying_qty", function(e) {
+        //  var price =$(".unit_price").val();
+        var price = $(this).closest("tr").find("input.unit_price").val();
+        //  var qty =$(".buying-qty").val();
+        var qty = $(this).closest("tr").find("input.buying_qty").val();
+        var totalPrice = price * qty;
+        $(this).closest("tr").find("input.buying_price").val(totalPrice);
 
+
+        //    alert(totalPrice)
+
+        totalAmount();
+    })
     </script>
 
     <!-- calculate total amount of invoice -->
 
     <script>
-        function totalAmount(){
-            var sum=0;
-            $('.buying_price').each(function(e){
-             var value=$(this).val();
-             if(!isNaN(value) && value.length!=0){
-                sum+=parseFloat(value);
+    function totalAmount() {
+        var sum = 0;
+        $('.buying_price').each(function(e) {
+                var value = $(this).val();
+                if (!isNaN(value) && value.length != 0) {
+                    sum += parseFloat(value);
 
-             }
-           //  alert(sum);
-            
+                }
+                //  alert(sum);
+
             }
-           
-            );
-             $('#calculate_amount').val(sum);
-      
-        }
+
+        );
+        $('#calculate_amount').val(sum);
+
+    }
     </script>
 
     <script id="document-template" type="text/x-handlebars-template">
@@ -330,27 +336,31 @@
 
 
     <script type="text/javascript">
-        $(function() {
-            $(document).on('change', '#category_id', function() {
-                var category_id = $(this).val();
-                var html = "";
-                $.ajax({
-                    url: "{{route('getProduct')}}", //the targeted resources
-                    type: "GET", //the type of http request
-                    data: {
-                        category_id: category_id
-                    }, // we pass our var
-                    success: function(data) {
-                        html = '<option value="">Select Product</option>'
-                        $.each(data, function(key, v) {
-                            html += '<option value="' + v.id + '">' + v.name + '</option>';
-                            $('#product_id').html(html);
-                        });
+    $(function() {
+        $(document).on('change', '#category_id', function() {
+            var category_id = $(this).val();
+            var supplier_id = $('#supplier_id').val();
 
-                    }
-                })
+            var html = "";
+            $.ajax({
+                url: "{{route('getSupplierProduct')}}", //the targeted resources
+                type: "GET", //the type of http request
+                data: {
+                    category_id: category_id,
+                    supplier_id: supplier_id,
+                }, // we pass our var
+                success: function(data) {
+                    html = '<option value="">Select Product</option>'
+                    $.each(data, function(key, v) {
+                        html += '<option value="' + v.id + '">' + v.name +
+                            '</option>';
+                        $('#product_id').html(html);
+                    });
+
+                }
             })
-        });
+        })
+    });
     </script>
     <!-- <script type="text/javascript">
     $(document).ready(function (){

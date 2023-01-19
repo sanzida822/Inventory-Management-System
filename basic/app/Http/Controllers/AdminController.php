@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
+use App\Http\Controllers\Illuminate\Database\QueryException;
 
 class AdminController extends Controller
 {
@@ -46,7 +49,7 @@ class AdminController extends Controller
         $data = User::find($id);
         $data->name = $request->name;
         $data->email = $request->email;
-        $data->username = $request->username;
+   
 
         if ($request->file('profile_image')) {
            $file = $request->file('profile_image');
@@ -82,7 +85,13 @@ class AdminController extends Controller
             'confirm_password' => 'required|same:newpassword',
 
         ]);
-
+        if(Str::length($request->newpassword)<8){
+            $notification=array(
+                'message'=>'Password must be at least 8 characters',
+                'alert-type'=>'error'
+            );
+            return redirect()->route('change.password')->with($notification);  
+        }
         $hashedPassword = Auth::user()->password;
         if (Hash::check($request->oldpassword,$hashedPassword )) {
             $users = User::find(Auth::id());
@@ -98,7 +107,87 @@ class AdminController extends Controller
 
     }// End Method
 
+public function AdminAll(){   
+     $ownId=Auth::user()->id;
+    
+    $admin=User::where('id','!=',$ownId)->latest()->get();
+   // $superAdmin=Auth::user()->status; 
+    $superAdmin=Auth::user()->status;  //know if an admin is superadmin or not
+   
+
+
+    return view('backend.admin.admin_all',compact('admin','superAdmin'));
+}
+
+public function AdminAdd(){
+    return view('backend.admin.admin_add');
+
+}
+
+public function AdminStore(Request $request){
+    $password=$request->password;
+    if(Str::length($password)<8){
+        $notification=array(
+            'message'=>'Password must be at least 8 characters',
+            'alert-type'=>'error'
+        );
+        return redirect()->route('admin.add')->with($notification);  
+    }
+   
+    try{
+        $user=new User();
+        $user->name=$request->name;
+       // $user->username=$request->username;
+        $user->email=$request->email;
+        $user->email_verified_at=Carbon::now();
+        
+        $user->password=Hash::make($request->password);
+      //  $user->created_by=User::get()->id;
+        $user->created_at=Carbon::now();
+        $user->status='0';
+        $user->save();
+    }catch(\Illuminate\Database\QueryException $e){ 
+        $errorCode = $e->errorInfo[1];
+        if($errorCode == 1062){
+            $notification=array(
+                'message'=>'Admin Email Already Exists',
+                'alert-type'=>'error'
+            );
+            return redirect()->route('admin.add')->with($notification);
+        }
+  
+       
+      }
+    
+     
+    
+      $notification=array(
+        'message'=>'Admin added successfully',
+        'alert-type'=>'success'
+    );
+    return redirect()->route('admin.all')->with($notification);
 
 
 }
- 
+public function AdminDelete($id){
+    $user=new User();
+    $user->findOrFail($id)->delete();
+    $notification=array(
+        'message'=>'Admin Deleted successfully',
+        'alert-type'=>'success'
+    );
+    return redirect()->route('admin.all')->with($notification);
+}
+
+public function AdminEdit($id){
+$admin=User::findOrFail($id);
+return view('backend.admin.admin_edit',compact('admin'));
+}
+
+// public function AdminUpdate(Request $request){
+//     $id=$request->id;
+//     $user=new User();
+
+// }
+
+}

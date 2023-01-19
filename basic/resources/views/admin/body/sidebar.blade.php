@@ -1,141 +1,161 @@
- <div class="vertical-menu">
+ <div class="vertical-menu" style="background-color: #defae8cf;">
 
-                <div data-simplebar class="h-100">
+     <div data-simplebar class="h-100">
 
-                    <!-- User details -->
-                
-
-                    <!--- Sidemenu -->
-                    <div id="sidebar-menu">
-                        <!-- Left Menu Start -->
-                        <ul class="metismenu list-unstyled" id="side-menu">
-                            <li class="menu-title">Menu</li>
-
-                            <li>
-                                <a href="index.html" class="waves-effect">
-                                    <i class="ri-dashboard-line"></i>Dashboard</span>
-                                </a>
-                            </li>
-
-                       
-                
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
-                                    <span>Manage Suppliers</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('supplier.all')}}">All Suppliers</a></li>
-                                 
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
-                                    <span>Manage Customer</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('customer.all')}}">All Customer</a></li>
-                                 
-                                </ul>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('customer.credit')}}">Credit Customer</a></li>
-                                 
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
-                                    <span>Manage Unit</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('unit.all')}}">All Unit</a></li>
-                                 
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
-                                    <span>Manage Category</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('category.all')}}">All Category</a></li>
-                                 
-                                </ul>
-                            </li>
-
-                            
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
-                                    <span>Manage Product</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('product.all')}}">All Product</a></li>
-                                 
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
-                                    <span>Manage Purchase</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('purchase.all')}}">All Purchase</a></li>
-                                 
-                                </ul>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('purchase.pending')}}">Approval</a></li>
-                                 
-                                </ul>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('daily.purchase.report')}}">Daily Purchase Report</a></li>
-                                 
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
-                                    <span>Manage invoice</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('invoice.all')}}">All Invoice</a></li>
-                                 
-                                </ul>
-                                <ul class="sub-menu" aria-expanded="false">
-                                  <li><a href="{{route('invoice.pending')}}">Approval Invoice</a></li>
-                                 
-                                </ul>
-                                <ul class="sub-menu" aria-expanded="false">
-                                  <li><a href="{{route('dailyinvoice.report')}}">Daily Invoice Report</a></li>
-                                 
-                                </ul>
-                                <ul class="sub-menu" aria-expanded="false">
-                                  <li><a href="{{route('invoice.print')}}">Print Invoice</a></li>
-                                 
-                                </ul>
-                            </li>
+         <!-- User details -->
 
 
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="ri-mail-send-line"></i>
-                                    <span>Manage Stock</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('stock.report')}}">Stock Report</a></li>
-                                 
-                                </ul>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{route('product.stock.report')}}">Product Wise Report</a></li>
-                                 
-                                </ul>
-                               
-                            </li>
-                            <!-- <li>
+         <!--- Sidemenu -->
+         <div id="sidebar-menu">
+             <!-- Left Menu Start -->
+             <ul class="metismenu list-unstyled" id="side-menu">
+
+
+                 <li>
+                     <a href="{{route('dashboard')}}" class="waves-effect">
+                         <i class="ri-dashboard-line"></i>Dashboard</span>
+                     </a>
+                 </li>
+
+
+                 <li style="color:#fff">
+                     <a href="javascript: void(0);" class="has-arrow waves-effect" style="">
+                         <i class="ri-admin-line"></i>
+                         <span>Manage Admin</span>
+                     </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('admin.all')}}">All Admins</a></li>
+
+                     </ul>
+                 </li>
+                 <li>
+                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                         <i class=" ri-user-add-line"></i>
+                         <span>Manage Customer</span>
+                     </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('customer.all')}}">All Customer</a></li>
+
+                     </ul>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('customer.credit')}}">Credit Customer</a></li>
+
+                     </ul>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('customer.paid')}}">Paid Customer</a></li>
+
+                     </ul>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('customer.report')}}">Customer Wise Report</a></li>
+
+                     </ul>
+
+                 </li>
+
+                 <li>
+                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                         <i class=" ri-contacts-line"></i>
+                         <span>Manage Suppliers</span>
+                     </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('supplier.all')}}">All Suppliers</a></li>
+
+                     </ul>
+                 </li>
+
+                 <li>
+                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                         <i class=" ri-honor-of-kings-line"></i>
+                         <span>Manage Category</span>
+                     </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('category.all')}}">All Category</a></li>
+
+                     </ul>
+                 </li>
+
+
+                 <li>
+                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                         <i class="ri-product-hunt-line"></i>
+                         <span>Manage Product</span>
+                     </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('product.all')}}">All Product</a></li>
+
+                     </ul>
+                 </li>
+                 <li>
+                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                         <i class=" ri-honour-line"></i>
+                         <span>Manage Unit</span>
+                     </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('unit.all')}}">All Unit</a></li>
+
+                     </ul>
+                 </li>
+
+
+                 <li>
+                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                         <i class=" ri-shopping-bag-line"></i>
+                         <span>Manage Purchase</span>
+                     </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('purchase.all')}}">All Purchase</a></li>
+
+                     </ul>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('purchase.pending')}}">Approval</a></li>
+
+                     </ul>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('daily.purchase.report')}}">Purchase Report</a></li>
+
+                     </ul>
+                 </li>
+
+                 <li>
+                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                         <i class=" ri-order-play-fill"></i>
+                         <span>Manage invoice</span>
+                     </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('invoice.all')}}">All Invoice</a></li>
+
+                     </ul>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('invoice.pending')}}">Approval Invoice</a></li>
+
+                     </ul>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('dailyinvoice.report')}}">Invoice Report</a></li>
+
+                     </ul>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('invoice.print')}}">Print Invoice</a></li>
+
+                     </ul>
+                 </li>
+
+
+                 <li>
+                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                         <i class="ri-archive-line"></i>
+                         <span>Manage Stock</span>
+                     </a>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('stock.report')}}">Stock Report</a></li>
+
+                     </ul>
+                     <ul class="sub-menu" aria-expanded="false">
+                         <li><a href="{{route('product.stock.report')}}">Product Wise Report</a></li>
+
+                     </ul>
+
+                 </li>
+                 <!-- <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="ri-layout-3-line"></i>
                                     <span>Layouts</span>
@@ -166,7 +186,7 @@
                                 </ul>
                             </li> -->
 
-                            <!-- <li class="menu-title">Pages</li>
+                 <!-- <li class="menu-title">Pages</li>
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -196,13 +216,13 @@
                                 </ul>
                             </li> -->
 
-                           
 
-                            
-                         
 
-                        </ul>
-                    </div>
-                    <!-- Sidebar -->
-                </div>
-            </div>
+
+
+
+             </ul>
+         </div>
+         <!-- Sidebar -->
+     </div>
+ </div>

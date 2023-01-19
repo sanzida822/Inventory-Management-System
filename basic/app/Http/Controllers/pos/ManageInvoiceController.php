@@ -45,16 +45,17 @@ class ManageInvoiceController extends Controller
 
     }
     public function StoreInvoicedata(Request $request){
+       
           if($request->category_id==null){
             $notification = array(
-                'message' => 'Sorry you didnot select any item',
+                'message' => 'Sorry you didnot select  item',
                 'alert-type' => 'error'
             );
             return redirect()->back()->with($notification);
           }
           elseif($request->product_id==null){
             $notification = array(
-                'message' => 'Sorry you didnot select any item',
+                'message' => 'Sorry you didnot select  item',
                 'alert-type' => 'error'
             );
             return redirect()->back()->with($notification);
@@ -180,10 +181,6 @@ class ManageInvoiceController extends Controller
     return redirect()->route('invoice.pending')->with($notification);
 }
 
-public function InvoicePending(){
-    $alldata=Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
-    return view('backend.invoice.invoice_pending',compact('alldata'));
-}
 
 public function InvoiceDelete($id){
     $invoice=Invoice::findOrFail($id);
@@ -198,11 +195,16 @@ public function InvoiceDelete($id){
     return redirect()->back()->with($notification);
 }
 
+public function InvoicePending(){
+    $alldata=Invoice::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
+    return view('backend.invoice.invoice_pending',compact('alldata'));
+}
 
 public function InvoiceApprove($id){
     $invoice=Invoice::with('invoice_detail')->FindOrFail($id);
-   
-    return view('backend.invoice.invoice_approve',compact('invoice'));
+    $invoice_no=Invoice::find($id)->invoice_no ;//pass invoice number to show it in invoice approve class
+ 
+    return view('backend.invoice.invoice_approve',compact('invoice','invoice_no'));
 }
 
 public function StockCheck(Request $request){   //aprrove invoice
@@ -238,7 +240,7 @@ public function StockCheck(Request $request){   //aprrove invoice
   $invoice=Invoice::findOrFail($request->id);
   $invoice->status="1";
 
-  $product=Product::where('íd','$request->id');
+  $product=Product::where('id','$request->id');
   DB::transaction(function() use ($request,$invoice){
     foreach($request->selling_qty as $key=>$value){
         $invoice_detail=InvoiceDetail::where('id',$key)->first();
@@ -246,8 +248,8 @@ public function StockCheck(Request $request){   //aprrove invoice
       $invoice_detail->save();
 
         $product=Product::where('id',$invoice_detail->product_id)->first();
-        $productQuantity=((float)$product->quantity)-((float)$request->selling_qty[$key]);
-        $product->quantity=$productQuantity;
+        $productQuantity=((float)$product->quantity)-((float)$request->selling_qty[$key]);  //after approve redure product quantity
+       $product->quantity=$productQuantity;
         $product->save();
 
     }
